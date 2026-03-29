@@ -10,7 +10,7 @@ import { CommonModule } from '@angular/common';
     styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-    title = 'Industrial EPC Solutions';
+    title = 'Vydyut Solutions';
     currentYear = new Date().getFullYear();
     mobileMenuOpen = false;
 

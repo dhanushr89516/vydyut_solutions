@@ -13,7 +13,7 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             <div *ngFor="let service of services"
-                class="service-card card card-hover group cursor-pointer border-2 border-transparent hover:border-accent relative overflow-hidden"
+                class="service-card card card-hover group cursor-pointer border-2 border-transparent hover:border-accent relative overflow-hidden min-h-80 flex flex-col"
                 [routerLink]="['/services', service.id]">
 
                 <!-- Service Header -->
@@ -48,7 +48,7 @@
 
                 <!-- View Details Link -->
                 <div
-                    class="mt-6 text-accent font-semibold flex items-center group-hover:translate-x-2 transition-transform">
+                    class="mt-auto text-accent font-semibold flex items-center group-hover:translate-x-2 transition-transform">
                     View Details
                     <lucide-icon name="info" class="w-5 h-5 ml-2"></lucide-icon>
                 </div>

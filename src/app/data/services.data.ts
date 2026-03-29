@@ -25,6 +25,62 @@ export interface ServiceVertical {
 
 export const SERVICE_VERTICALS: ServiceVertical[] = [
     {
+
+        id: 'epc-services',
+        title: 'EPC Contracting Services',
+        icon: 'zap',
+        tagline: 'From Concept to Commissioning, We Deliver',
+        description: 'Complete turnkey EPC solutions from design to commissioning, ensuring efficient execution, quality control, timely delivery, cost optimization, and industry compliance.',
+        solutions: [
+            'Complete project engineering and detailed design',
+            'Electrical system design and panel engineering',
+            'Industrial automation and control system integration',
+            'Procurement of high-quality equipment and materials',
+            'Vendor coordination and supply chain management',
+            'Installation and on-site execution',
+            'Testing, commissioning, and validation',
+            'Energy-efficient and cost-optimized solutions',
+            'Project documentation and compliance management',
+            'Post-installation support and maintenance services'
+        ],
+        benefits: [
+            {
+                icon: 'shield-check',
+                title: 'Single Point Responsibility',
+                description: 'We handle the entire project lifecycle, reducing coordination challenges and ensuring accountability from start to finish.'
+            },
+            {
+                icon: 'zap',
+                title: 'Technical Expertise',
+                description: 'Our team brings deep knowledge in electrical engineering and automation, ensuring high-performance and reliable systems'
+            },
+            {
+                icon: 'trending-down',
+                title: 'Timely Project Delivery',
+                description: 'With structured planning and execution strategies, we ensure projects are delivered on schedule without compromising quality.'
+            },
+            {
+                icon: 'clock',
+                title: 'Cost Efficiency',
+                description: 'Optimized procurement and efficient resource management help reduce overall project costs while maintaining superior standards'
+            }
+        ],
+        processSteps: [
+            { step: 1, title: 'Requirement Analysis', description: 'We analyze project needs, site conditions, and define clear scope for efficient execution.' },
+            { step: 2, title: 'Engineering & Design', description: 'We create precise designs and technical plans aligned with industry standards and goals.' },
+            { step: 3, title: 'Procurement & Fabrication', description: 'We source quality materials and ensure timely delivery through efficient supply chain management.' },
+            { step: 4, title: 'Installation,Testing & Execution', description: 'We perform installation with skilled teams, ensuring safety, quality, and project accuracy.' },
+            { step: 5, title: 'Commissioning, Handover & Training', description: 'We test systems thoroughly, validate performance, and ensure smooth final project handover.' }
+        ],
+        industriesServed: ['Manufacturing & Process Industries', 'Renewable Energy (Solar & Wind)', 'Automotive & Engineering', 'Water Treatment & Waste Management', 'Chemical Plants', 'Oil & Gas','Infrastructure & Utilities'],
+        keyStats: [
+            { value: '500+', label: 'Panels Installed' },
+            { value: '99.9%', label: 'Uptime Guaranteed' },
+            { value: '30%', label: 'Energy Savings' },
+            { value: '15yr+', label: 'Experience' }
+        ]
+    },
+    {
         id: 'electrical-infrastructure',
         title: 'Electrical Infrastructure',
         icon: 'zap',
