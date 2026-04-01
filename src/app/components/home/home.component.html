@@ -18,11 +18,8 @@
                 Complete EPC solutions for Electrical Infrastructure, Industrial Automation, and CCTV Surveillance
             </p>
             <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                <a routerLink="/services" class="btn-primary text-lg px-8 py-4">
+                <a (click)="navigateToServices()" class="btn-primary text-lg px-8 py-4 cursor-pointer">
                     Explore Our Services
-                </a>
-                <a routerLink="/contact" class="btn-secondary text-lg px-8 py-4">
-                    Request a Consultation
                 </a>
             </div>
         </div>
@@ -113,9 +110,9 @@
         </div>
 
         <div class="text-center mt-12">
-            <a routerLink="/services" class="btn-primary text-lg">
+            <button (click)="navigateToServices()" class="btn-primary text-lg">
                 View All Services
-            </a>
+            </button>
         </div>
     </div>
 </section>
@@ -127,8 +124,8 @@
         <p class="text-xl text-gray-300 mb-8">
             Get expert consultation and customized solutions for your industrial needs
         </p>
-        <a routerLink="/contact" class="btn-primary text-lg px-10 py-4 inline-block">
+        <button (click)="navigateToContact()" class="btn-primary text-lg px-10 py-4 inline-block"> 
             Get Started Today
-        </a>
+        </button>
     </div>
 </section>

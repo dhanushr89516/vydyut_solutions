@@ -34,7 +34,7 @@ export class AboutComponent {
     ];
 
     certifications = [
-        'ISO 9001:2015 Certified',
+        // 'ISO 9001:2015 Certified',
         'GST Registered',
         'MSME Certified',
         'Udyam Registration',
