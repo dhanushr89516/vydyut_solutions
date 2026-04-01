@@ -12,23 +12,22 @@
       <!-- Desktop Navigation -->
       <div class="hidden md:flex items-center space-x-8">
         <a routerLink="/" routerLinkActive="text-accent" [routerLinkActiveOptions]="{exact: true}" 
+           (click)="scrollToTop()"
            class="text-gray-300 hover:text-white transition-colors duration-200 font-medium">
           Home
         </a>
         <a routerLink="/about" routerLinkActive="text-accent" 
+           (click)="scrollToTop()"
            class="text-gray-300 hover:text-white transition-colors duration-200 font-medium">
           About Us
         </a>
         <a routerLink="/services" routerLinkActive="text-accent" 
+           (click)="scrollToTop()"
            class="text-gray-300 hover:text-white transition-colors duration-200 font-medium">
           Services
         </a>
-        <a routerLink="/contact" routerLinkActive="text-accent" 
-           class="text-gray-300 hover:text-white transition-colors duration-200 font-medium">
-          Contact
-        </a>
-        <a routerLink="/contact" class="btn-primary">
-          Get a Quote
+        <a routerLink="/contact" (click)="scrollToTop()" class="btn-primary">
+          Contact Us
         </a>
       </div>
 
@@ -47,25 +46,21 @@
   <!-- Mobile Menu -->
   <div *ngIf="mobileMenuOpen" class="md:hidden bg-primary-900 border-t border-primary-700">
     <div class="px-2 pt-2 pb-3 space-y-1">
-      <a routerLink="/" (click)="closeMobileMenu()" routerLinkActive="bg-accent" [routerLinkActiveOptions]="{exact: true}"
+      <a routerLink="/" (click)="closeMobileMenu(); scrollToTop()" routerLinkActive="bg-accent" [routerLinkActiveOptions]="{exact: true}"
          class="block px-3 py-2 rounded-md text-white hover:bg-primary-700 transition-colors">
         Home
       </a>
-      <a routerLink="/about" (click)="closeMobileMenu()" routerLinkActive="bg-accent"
+      <a routerLink="/about" (click)="closeMobileMenu(); scrollToTop()" routerLinkActive="bg-accent"
          class="block px-3 py-2 rounded-md text-white hover:bg-primary-700 transition-colors">
         About Us
       </a>
-      <a routerLink="/services" (click)="closeMobileMenu()" routerLinkActive="bg-accent"
+      <a routerLink="/services" (click)="closeMobileMenu(); scrollToTop()" routerLinkActive="bg-accent"
          class="block px-3 py-2 rounded-md text-white hover:bg-primary-700 transition-colors">
         Services
       </a>
-      <a routerLink="/contact" (click)="closeMobileMenu()" routerLinkActive="bg-accent"
-         class="block px-3 py-2 rounded-md text-white hover:bg-primary-700 transition-colors">
-        Contact
-      </a>
-      <a routerLink="/contact" (click)="closeMobileMenu()"
+      <a routerLink="/contact" (click)="closeMobileMenu(); scrollToTop()"
          class="block px-3 py-2 rounded-md bg-accent text-white font-semibold text-center">
-        Get a Quote
+        Contact Us
       </a>
     </div>
   </div>
@@ -79,27 +74,35 @@
 <!-- Footer -->
 <footer class="bg-primary-900 text-gray-300">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-    <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
       <!-- About Section -->
       <div class="col-span-1">
         <div class="flex items-center mb-4">
-          <img src="assets/images/logo.svg" alt="Vydyut Solutions Logo" class="h-10 w-auto">
+          <a routerLink="/" class="flex items-center">
+            <img src="assets/images/logo.svg" alt="Vydyut Solutions Logo" class="h-10 w-auto">
+          </a>
         </div>
-        <p class="text-sm text-gray-400">
+        <p class="text-sm text-gray-400 w-56">
           Leading provider of Electrical, Automation, and CCTV solutions for industrial facilities.
         </p>
       </div>
 
       <!-- Services Links -->
-      <div class="col-span-1">
+      <!-- <div class="col-span-1">
         <h3 class="text-white font-semibold text-lg mb-4">Services</h3>
         <ul class="space-y-2 text-sm">
+          <li><a routerLink="/services" class="hover:text-accent transition-colors">EPC Contracting</a></li>
           <li><a routerLink="/services" class="hover:text-accent transition-colors">Electrical Infrastructure</a></li>
           <li><a routerLink="/services" class="hover:text-accent transition-colors">Industrial Automation</a></li>
           <li><a routerLink="/services" class="hover:text-accent transition-colors">CCTV & Surveillance</a></li>
+          <li><a routerLink="/services" class="hover:text-accent transition-colors">Instrumentation & Control</a></li>
           <li><a routerLink="/services" class="hover:text-accent transition-colors">Fire Safety Systems</a></li>
+          <li><a routerLink="/services" class="hover:text-accent transition-colors">Building Management</a></li>
+          <li><a routerLink="/services" class="hover:text-accent transition-colors">Renewable Energy</a></li>
+          <li><a routerLink="/services" class="hover:text-accent transition-colors">Maintenance & AMC</a></li>
+          <li><a routerLink="/services" class="hover:text-accent transition-colors">Industrial Networking</a></li>
         </ul>
-      </div>
+      </div> -->
 
       <!-- Legal & Compliance -->
       <div class="col-span-1">
@@ -117,10 +120,10 @@
             <span class="text-accent">✓</span>
             <span>Udyam Registered</span>
           </li>
-          <li class="flex items-center space-x-2">
+          <!-- <li class="flex items-center space-x-2">
             <span class="text-accent">✓</span>
             <span>ISO Certified</span>
-          </li>
+          </li> -->
         </ul>
       </div>
 
@@ -130,15 +133,19 @@
         <ul class="space-y-2 text-sm">
           <li class="flex items-start space-x-2">
             <span class="text-accent mt-1">📍</span>
-            <span>Industrial Area, Sector 62, Noida, UP 201301</span>
+            <span>{{ contactInfo.address }}</span>
           </li>
           <li class="flex items-center space-x-2">
             <span class="text-accent">📞</span>
-            <span>+91 9876543210</span>
+            <a [href]="'tel:' + contactInfo.phone" class="hover:text-accent hover:underline transition-colors">
+              {{ contactInfo.phone }}
+            </a>
           </li>
           <li class="flex items-center space-x-2">
             <span class="text-accent">✉️</span>
-            <span>info&#64;industrialepc.com</span>
+            <a [href]="'mailto:' + contactInfo.emails.info" class="hover:text-accent hover:underline transition-colors">
+              {{ contactInfo.emails.info }}
+            </a>
           </li>
         </ul>
       </div>

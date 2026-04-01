@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { ServiceDataService } from '../../services/service-data.service';
 import { ServiceVertical } from '../../data/services.data';
 import { LucideAngularModule } from 'lucide-angular';
@@ -14,6 +14,23 @@ import { LucideAngularModule } from 'lucide-angular';
 })
 export class HomeComponent {
     featuredServices: ServiceVertical[] = [];
+
+    constructor(private serviceDataService: ServiceDataService, private router: Router) {
+        // Get first 6 services for featured section
+        this.featuredServices = this.serviceDataService.getAllServices().slice(0, 6);
+    }
+
+    navigateToServices() {
+        this.router.navigate(['/services']).then(() => {
+            window.scrollTo(0, 0);
+        });
+    }
+
+    navigateToContact() {
+        this.router.navigate(['/contact']).then(() => {
+            window.scrollTo(0, 0);
+        });
+    }
 
     stats = [
         { label: 'Reliable Execution', value: '500+', description: 'Projects Completed' },
@@ -38,9 +55,4 @@ export class HomeComponent {
             icon: '📈'
         }
     ];
-
-    constructor(private serviceDataService: ServiceDataService) {
-        // Get first 6 services for featured section
-        this.featuredServices = this.serviceDataService.getAllServices().slice(0, 6);
-    }
 }

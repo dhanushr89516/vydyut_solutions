@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { CONTACT_INFO } from './constants/contact.constants';
 
 @Component({
     selector: 'app-root',
@@ -13,6 +14,7 @@ export class AppComponent {
     title = 'Vydyut Solutions';
     currentYear = new Date().getFullYear();
     mobileMenuOpen = false;
+    contactInfo = CONTACT_INFO;
 
     toggleMobileMenu() {
         this.mobileMenuOpen = !this.mobileMenuOpen;
@@ -20,5 +22,9 @@ export class AppComponent {
 
     closeMobileMenu() {
         this.mobileMenuOpen = false;
+    }
+
+    scrollToTop() {
+        window.scrollTo(0, 0);
     }
 }
