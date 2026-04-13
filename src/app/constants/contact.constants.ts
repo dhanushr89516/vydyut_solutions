@@ -3,7 +3,7 @@ export const CONTACT_INFO = {
   phone: '+91 89516-41523',
   emergencyPhone: '+91 82771-75828',
   emails: {
-    info: 'info@industrialepc.com',
+    sales: 'sales@industrialepc.com',
     support: 'support@industrialepc.com'
   },
   businessHours: 'Mon - Sat, 9:00 AM to 6:00 PM'

@@ -168,8 +168,8 @@
                                     <div class="flex items-center gap-3 text-sm">
                                         <lucide-icon name="mail"
                                             class="w-4 h-4 text-accent flex-shrink-0"></lucide-icon>
-                                        <a [href]="'mailto:' + contactInfo.emails.info" class="hover:text-accent-300 transition-colors">
-                                          {{ contactInfo.emails.info }}
+                                        <a [href]="'mailto:' + contactInfo.emails.sales" class="hover:text-accent-300 transition-colors">
+                                          {{ contactInfo.emails.sales }}
                                         </a>
                                     </div>
                                     <div class="flex items-center gap-3 text-sm">
@@ -181,8 +181,8 @@
                             </div>
                         </div>
 
-                        <!-- Emergency Card -->
-                        <div class="card border-2 border-red-100 bg-red-50">
+                        <!-- Emergency Card / commented as we are not providing maintenance services -->
+                        <!-- <div class="card border-2 border-red-100 bg-red-50">
                             <div class="flex items-start gap-4">
                                 <div
                                     class="w-10 h-10 bg-red-100 rounded-lg flex items-center justify-center flex-shrink-0">
@@ -196,7 +196,7 @@
                                         class="text-red-600 font-bold text-lg">{{ contactInfo.emergencyPhone }}</a>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
 
                         <!-- Quick Highlights -->
                         <div class="card border border-gray-100">
