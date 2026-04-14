@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators, AbstractControl, ValidationErrors } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
 import { ServiceDataService } from '../../services/service-data.service';
 import { ServiceVertical } from '../../data/services.data';
 import { CONTACT_INFO } from '../../constants/contact.constants';
+import { environment } from '../../../environments/environment';
 
 // Custom validator to prevent whitespace-only entries
 function noWhitespaceOnlyValidator(control: AbstractControl): ValidationErrors | null {
@@ -32,7 +34,8 @@ export class ContactComponent {
 
     constructor(
         private fb: FormBuilder,
-        private serviceDataService: ServiceDataService
+        private serviceDataService: ServiceDataService,
+        private http: HttpClient
     ) {
         this.services = this.serviceDataService.getAllServices();
 
@@ -50,15 +53,20 @@ export class ContactComponent {
         if (this.contactForm.valid) {
             this.isSubmitting = true;
 
-            // Log for EmailJS integration as per requirements
-            console.log('Form Data for EmailJS:', this.contactForm.value);
-
-            // Simulate API call
-            setTimeout(() => {
-                this.isSubmitting = false;
-                this.formSubmitted = true;
-                this.contactForm.reset();
-            }, 1500);
+            this.http.post(`${environment.apiBaseUrl}/api/contact`, this.contactForm.value)
+                .subscribe({
+                    next: (response: any) => {
+                        console.log('Email sent successfully:', response);
+                        this.isSubmitting = false;
+                        this.formSubmitted = true;
+                        this.contactForm.reset();
+                    },
+                    error: (error) => {
+                        console.error('Email sending failed:', error);
+                        this.isSubmitting = false;
+                        alert('Failed to send message. Please try again or contact us directly.');
+                    }
+                });
         } else {
             this.markFormGroupTouched(this.contactForm);
         }
