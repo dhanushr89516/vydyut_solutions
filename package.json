@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "prestart": "node scripts/set-env.js",
-    "start": "node scripts/serve.js",
+    "start": "http-server dist/vydyut-solutions/browser -p ${PORT:-8080} -a 0.0.0.0 --proxy http://localhost:${PORT:-8080}?",
     "start:dev": "ng serve --port 4201",
     "prebuild": "node scripts/set-env.js",
     "server": "cd server && npm start",
@@ -38,7 +38,6 @@
     "@types/jasmine": "~5.1.0",
     "autoprefixer": "^10.4.0",
     "concurrently": "^8.2.0",
-    "express": "^5.2.1",
     "http-server": "^14.1.1",
     "jasmine-core": "~5.1.0",
     "karma": "~6.4.0",
