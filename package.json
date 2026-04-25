@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "prestart": "node scripts/set-env.js",
-    "start": "http-server dist/vydyut-solutions -p ${PORT:-8080} -a 0.0.0.0 --proxy http://localhost:${PORT:-8080}?",
+    "start": "http-server dist/vydyut-solutions/browser -p ${PORT:-8080} -a 0.0.0.0 --proxy http://localhost:${PORT:-8080}?",
     "start:dev": "ng serve --port 4201",
     "prebuild": "node scripts/set-env.js",
     "server": "cd server && npm start",
