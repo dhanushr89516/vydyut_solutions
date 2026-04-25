@@ -26,12 +26,24 @@ app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true }));
 
 const createTransporter = () => {
+  console.log('--- Email Configuration ---');
+  console.log('USER:', process.env.EMAIL_USER ? 'Present' : 'MISSING');
+  console.log('PASS:', process.env.EMAIL_APP_PASSWORD ? 'Present' : 'MISSING');
+  console.log('SALES_EMAIL:', process.env.SALES_EMAIL ? 'Present' : 'MISSING');
+
   return nodemailer.createTransport({
-    service: 'gmail',
+    host: 'smtp.gmail.com',
+    port: 465,
+    secure: true,
+    family: 4,
     auth: {
       user: process.env.EMAIL_USER,
       pass: process.env.EMAIL_APP_PASSWORD
-    }
+    },
+    // Increased timeouts for production cloud environments
+    connectionTimeout: 10000,
+    greetingTimeout: 10000,
+    socketTimeout: 20000
   });
 };
 
@@ -77,12 +89,26 @@ app.post('/api/contact', async (req, res) => {
       `
     };
 
+    console.log(`Sending email from ${process.env.EMAIL_USER} to ${process.env.SALES_EMAIL}...`);
     await transporter.sendMail(mailOptions);
+    console.log('✅ Email sent successfully');
 
     res.json({ success: true, message: 'Email sent successfully' });
   } catch (error) {
-    console.error('Email sending error:', error);
-    res.status(500).json({ success: false, message: 'Failed to send email', error: error.message });
+    console.error('❌ DETAILED ERROR:', {
+      message: error.message,
+      stack: error.stack,
+      code: error.code,
+      command: error.command,
+      response: error.response,
+      responseCode: error.responseCode
+    });
+    res.status(500).json({
+      success: false,
+      message: 'Failed to send email',
+      error: error.message,
+      code: error.code
+    });
   }
 });
 

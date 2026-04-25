@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators, AbstractControl, ValidationErrors } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
+import { Resend } from 'resend';
 import { ServiceDataService } from '../../services/service-data.service';
 import { ServiceVertical } from '../../data/services.data';
 import { CONTACT_INFO } from '../../constants/contact.constants';
@@ -34,8 +34,7 @@ export class ContactComponent {
 
     constructor(
         private fb: FormBuilder,
-        private serviceDataService: ServiceDataService,
-        private http: HttpClient
+        private serviceDataService: ServiceDataService
     ) {
         this.services = this.serviceDataService.getAllServices();
 
@@ -49,24 +48,49 @@ export class ContactComponent {
         });
     }
 
-    onSubmit() {
+    async onSubmit() {
         if (this.contactForm.valid) {
             this.isSubmitting = true;
 
-            this.http.post(`${environment.apiBaseUrl}/api/contact`, this.contactForm.value)
-                .subscribe({
-                    next: (response: any) => {
-                        console.log('Email sent successfully:', response);
-                        this.isSubmitting = false;
-                        this.formSubmitted = true;
-                        this.contactForm.reset();
-                    },
-                    error: (error) => {
-                        console.error('Email sending failed:', error);
-                        this.isSubmitting = false;
-                        alert('Failed to send message. Please try again or contact us directly.');
-                    }
+            try {
+                const resend = new Resend(environment.resendApiKey);
+                const { name, email, companyName, phone, serviceRequired, message } = this.contactForm.value;
+
+                const { data, error } = await resend.emails.send({
+                    from: 'Vydyut Contact <onboarding@resend.dev>',
+                    to: [environment.salesEmail],
+                    replyTo: email,
+                    subject: `New Contact Form Submission from ${name}`,
+                    html: `
+                        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+                            <h2 style="color: #1f2937; border-bottom: 2px solid #3b82f6; padding-bottom: 10px;">New Contact Form Submission</h2>
+                            <div style="background: #f8fafc; padding: 20px; border-radius: 8px; margin: 20px 0;">
+                                <p><strong>Name:</strong> ${name}</p>
+                                <p><strong>Email:</strong> <a href="mailto:${email}">${email}</a></p>
+                                <p><strong>Company:</strong> ${companyName}</p>
+                                <p><strong>Phone:</strong> <a href="tel:${phone}">${phone}</a></p>
+                            </div>
+                            <div style="background: #ffffff; border: 1px solid #e2e8f0; padding: 20px; border-radius: 8px;">
+                                <h3 style="color: #1f2937; margin-top: 0;">Message:</h3>
+                                <p style="white-space: pre-wrap; line-height: 1.6;">${message || 'No message provided'}</p>
+                            </div>
+                        </div>
+                    `
                 });
+
+                if (error) {
+                    throw error;
+                }
+
+                console.log('Email sent successfully:', data);
+                this.isSubmitting = false;
+                this.formSubmitted = true;
+                this.contactForm.reset();
+            } catch (error) {
+                console.error('Email sending failed:', error);
+                this.isSubmitting = false;
+                alert('Failed to send message. Please try again or contact us directly.');
+            }
         } else {
             this.markFormGroupTouched(this.contactForm);
         }
