@@ -1,4 +1,4 @@
 export const environment = {
   production: false,
-  apiBaseUrl: 'vydyutsolutionsserver-production.up.railway.app'
+  apiBaseUrl: 'https://vydyutsolutionsserver-production.up.railway.app'
 };
