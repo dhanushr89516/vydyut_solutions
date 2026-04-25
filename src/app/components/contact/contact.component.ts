@@ -5,7 +5,6 @@ import emailjs from '@emailjs/browser';
 import { ServiceDataService } from '../../services/service-data.service';
 import { ServiceVertical } from '../../data/services.data';
 import { CONTACT_INFO } from '../../constants/contact.constants';
-import { environment } from '../../../environments/environment';
 
 // Custom validator to prevent whitespace-only entries
 function noWhitespaceOnlyValidator(control: AbstractControl): ValidationErrors | null {
@@ -66,10 +65,10 @@ export class ContactComponent {
                 };
 
                 const result = await emailjs.send(
-                    environment.emailjsServiceId,
-                    environment.emailjsTemplateId,
+                    process.env.EMAILJS_SERVICE_ID,
+                    process.env.EMAILJS_TEMPLATE_ID,
                     templateParams,
-                    environment.emailjsPublicKey
+                    process.env.EMAILJS_PUBLIC_KEY
                 );
 
                 console.log('Email sent successfully:', result.text);

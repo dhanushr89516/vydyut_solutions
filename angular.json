@@ -41,7 +41,12 @@
                         "styles": [
                             "src/styles.css"
                         ],
-                        "scripts": []
+                        "scripts": [],
+                        "define": {
+                            "process.env.EMAILJS_SERVICE_ID": "\"service_31hpcr6\"",
+                            "process.env.EMAILJS_TEMPLATE_ID": "\"template_7nx2epr\"",
+                            "process.env.EMAILJS_PUBLIC_KEY": "\"s6NfWJfFpPeyRj2Z4\""
+                        }
                     },
                     "configurations": {
                         "production": {
@@ -107,6 +112,6 @@
         }
     },
     "cli": {
-      "analytics": "61a9b0cf-ad06-42db-aa30-1994081bd9af"
+        "analytics": "61a9b0cf-ad06-42db-aa30-1994081bd9af"
     }
 }
